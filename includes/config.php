@@ -3,9 +3,9 @@
 // This is a dummy config file that mirrors the actual config.php that exists in
 // the same directory. Replace values with the actual usernames/passwords/etc, and
 // rename/copy to config.php
-define('DB_SERVER', 'server:port');
-define('DB_USERNAME', 'username');
-define('DB_PASSWORD', 'password');
+define('DB_SERVER', 'mysql-deployment:3306');
+define('DB_USERNAME', 'root');
+define('DB_PASSWORD', 'tiger');
 define('DB_NAME', 'dbname');
 define('TVDB_TOKEN', 'TVDatabaseToken');
 define('MAIL_USER', 'emailusername');
