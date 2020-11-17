@@ -6,7 +6,7 @@
 define('DB_SERVER', 'mysql-deployment:3306');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', 'tiger');
-define('DB_NAME', 'dbname');
+define('DB_NAME', 'plex');
 define('TVDB_TOKEN', 'TVDatabaseToken');
 define('MAIL_USER', 'emailusername');
 
