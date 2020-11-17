@@ -4,7 +4,7 @@
 /// Forces a session to use https (if it's not local)
 /// </summary>
 function requireSSL() {
-    if ($_SERVER["REMOTE_ADDR"] != "::1" && $_SERVER["REMOTE_ADDR"] != "jt-main" && (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == 'off')) {
+    if ($_SERVER["REMOTE_ADDR"] != "::1" && $_SERVER["REMOTE_ADDR"] != "192.168.0.175" && (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == 'off')) {
         header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
         exit();
     }
