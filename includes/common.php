@@ -2,13 +2,14 @@
 
 /// <summary>
 /// Forces a session to use https (if it's not local)
+/// DISABLED for TESTING IN K8s
+///function requireSSL() {
+///    if ($_SERVER["REMOTE_ADDR"] != "::1" && $_SERVER["REMOTE_ADDR"] != "127.0.0.1" && (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == 'off')) {
+///        header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
+///        exit();
+///    }
+///}
 /// </summary>
-function requireSSL() {
-    if ($_SERVER["REMOTE_ADDR"] != "::1" && $_SERVER["REMOTE_ADDR"] != "192.168.99.107" && (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == 'off')) {
-        header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
-        exit();
-    }
-}
 
 /// <summary>
 /// Ensure the user is logged in. If they're not, either return 401 or redirect to the login page
