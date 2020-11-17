@@ -5,7 +5,7 @@ session_start();
 require_once "includes/common.php";
 require_once "includes/config.php";
 check_if_banned();
-requireSSL();
+/// DISABLED FOR K8S TESTING requireSSL();
 ieCheck();
 
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === TRUE)
