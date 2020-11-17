@@ -57,7 +57,7 @@ def process():
     if onlyicon:
         return
     
-    deps = json.loads(get_lines('/var/www/html/includes' + os.sep + 'deps.json'))
+    deps = json.loads(get_lines('includes' + os.sep + 'deps.json'))
 
     if not nocss and not onlyicon:
         process_css(files, deps, force, quiet, not cleancss)
