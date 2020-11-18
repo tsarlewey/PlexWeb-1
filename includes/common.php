@@ -441,8 +441,8 @@ function error_and_exit($status, $message='')
 
     $_GET['r'] = $status;
     $_GET['m'] = $message;
-    $_SERVER['REDIRECT_URL'] = "plex/get_status.php";
-    include $_SERVER['DOCUMENT_ROOT'] . "/plex/error.php";
+    $_SERVER['REDIRECT_URL'] = "/get_status.php";
+    include $_SERVER['DOCUMENT_ROOT'] . "/error.php";
     exit;
 }
 
@@ -696,7 +696,7 @@ function fire_and_forget($url, $data)
 /// </summary>
 function send_email_forget($to, $content, $subject)
 {
-    $url = "http://127.0.0.1/plex/includes/send_email.php";
+    $url = "http://127.0.0.1/includes/send_email.php";
     $data = http_build_query(array("to" => $to, "content" => $content, "subject" => $subject));
     fire_and_forget($url, $data);
 }
