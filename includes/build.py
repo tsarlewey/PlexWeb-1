@@ -227,7 +227,7 @@ def process_css(files, deps, force, quiet, csso):
                 print('   ', output)
         else:
             print('Copying', clean_file, 'to main directory')
-            shutil.copyfile(tmp_file, 'min/style/' + clean_file)
+            shutil.copyfile(tmp_file, './min/style/' + clean_file)
     clean_tmp()
     if not modified_any and quiet:
         print('CSS up to date!')
