@@ -46,6 +46,9 @@ def process():
     if '-nomdtmi' in args_lower:
         rem_log |= 4
 
+    if not verify_structure():
+        return
+
     if single:
         files = [args_lower[args_lower.index('-s') + 1]]
     else:
@@ -57,7 +60,7 @@ def process():
     if onlyicon:
         return
     
-    deps = json.loads(get_lines('/var/www/html/includes' + os.sep + 'deps.json'))
+    deps = json.loads(get_lines('includes' + os.sep + 'deps.json'))
 
     if not nocss and not onlyicon:
         process_css(files, deps, force, quiet, not cleancss)
@@ -105,6 +108,61 @@ def process():
         cmp_sizes(comparisons)
 
     clean_tmp()
+
+
+def verify_structure():
+    '''
+    Ensures the proper cache folder structure exists
+    '''
+    if not (os.path.isdir('includes') and os.path.isdir('includes' + os.sep + 'cache')):
+        # The 'includes/cache' directory should always exist. If it doesn't we may not
+        # # have been run from the root directory, which is required
+        print('Could not find "includes" folder. Are you running this from the project root?')
+        return False
+    
+    s = os.sep
+    base = f'includes{s}cache{s}'
+
+    background = base + f'background{s}'
+    if not os.path.isdir(background):
+        os.mkdir(background)
+
+    art = background + 'art'
+    if not os.path.isdir(art):
+        os.mkdir(art)
+
+    thumb = background + 'thumb'
+    if not os.path.isdir(thumb):
+        os.mkdir(thumb)
+
+    poster = base + f'poster{s}'
+    if not os.path.isdir(poster):
+        os.mkdir(poster)
+    
+    p342 = poster + '342'
+    if not os.path.isdir(p342):
+        os.mkdir(p342)
+    
+    if not os.path.isdir(base + 'thumb'):
+        os.mkdir(base + 'thumb')
+
+    if not os.path.isdir('min'):
+        os.mkdir('min')
+    
+    min_base = f'min{s}'
+    min_script = min_base + 'script'
+    if not os.path.isdir(min_script):
+        os.mkdir(min_script)
+
+    min_icon = min_base + 'icon'
+    if not os.path.isdir(min_icon):
+        os.mkdir(min_icon)
+    
+    min_style = min_base + 'style'
+    if not os.path.isdir(min_style):
+        os.mkdir(min_style)
+
+    return True
 
 
 def process_svg_icons(force, quiet):
@@ -210,7 +268,7 @@ def process_css(files, deps, force, quiet, csso):
         write_temp(file, combined, 'css')
         tmp_file = 'tmp' + os.sep + file[:file.rfind('.')] + '.tmp.css'
         base_file = file[file.find(os.sep) + 1:file.find('.')]
-        for existing in glob.glob('/var/www/html/min/style/' + base_file + '.*.min.css'):
+        for existing in glob.glob('min/style/' + base_file + '.*.min.css'):
             os.remove(existing)
         file_hash = get_hash(tmp_file)
         clean_file = base_file + '.' + file_hash + '.min.css'
@@ -227,7 +285,7 @@ def process_css(files, deps, force, quiet, csso):
                 print('   ', output)
         else:
             print('Copying', clean_file, 'to main directory')
-            shutil.copyfile(tmp_file, '/var/www/html/min/style/' + clean_file)
+            shutil.copyfile(tmp_file, 'min/style/' + clean_file)
     clean_tmp()
     if not modified_any and quiet:
         print('CSS up to date!')
@@ -340,12 +398,15 @@ def process_file(file, modified_dates, deps, force, rem_log, ultra, quiet):
 
 def get_lines(file):
     '''Returns all lines of the given file as a single string'''
-    with open(file) as content:
-        try:
-            return ''.join(content.readlines())
-        except:
-            print("Error processing", file)
-            return ''
+    try:
+        with open(file) as content:
+            try:
+                return ''.join(content.readlines())
+            except:
+                print("Error processing", file)
+                return ''
+    except:
+        return ''
 
 
 def get_deps(file, deps):
