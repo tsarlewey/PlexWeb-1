@@ -210,7 +210,7 @@ def process_css(files, deps, force, quiet, csso):
         write_temp(file, combined, 'css')
         tmp_file = 'tmp' + os.sep + file[:file.rfind('.')] + '.tmp.css'
         base_file = file[file.find(os.sep) + 1:file.find('.')]
-        for existing in glob.glob('min/style/' + base_file + '.*.min.css'):
+        for existing in glob.glob('/var/www/html/min/style/' + base_file + '.*.min.css'):
             os.remove(existing)
         file_hash = get_hash(tmp_file)
         clean_file = base_file + '.' + file_hash + '.min.css'
