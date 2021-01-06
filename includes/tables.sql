@@ -14,7 +14,7 @@ CREATE TABLE `users` (
  PRIMARY KEY (`id`),
  UNIQUE KEY `username` (`username`),
  KEY `username_normalized` (`username_normalized`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `user_requests` (
  `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -33,7 +33,7 @@ CREATE TABLE `user_requests` (
  PRIMARY KEY (`id`),
  KEY `username_id` (`username_id`),
  CONSTRAINT `user_requests_ibfk_1` FOREIGN KEY (`username_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `user_info` (
  `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -49,7 +49,7 @@ CREATE TABLE `user_info` (
  PRIMARY KEY (`id`),
  UNIQUE KEY `userid` (`userid`),
  CONSTRAINT `user_info_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_c
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `request_comments` (
  `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -61,7 +61,7 @@ CREATE TABLE `request_comments` (
  PRIMARY KEY (`id`),
  KEY `req_id` (`req_id`),
  CONSTRAINT `request_comments_ibfk_1` FOREIGN KEY (`req_id`) REFERENCES `user_requests` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `ip_cache` (
  `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -73,7 +73,7 @@ CREATE TABLE `ip_cache` (
  `query_count` int(11) NOT NULL DEFAULT '1',
  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `imdb_tv_cache` (
  `entry` int(11) NOT NULL AUTO_INCREMENT,
@@ -83,7 +83,7 @@ CREATE TABLE `imdb_tv_cache` (
  `imdb_link` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
  `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
  PRIMARY KEY (`entry`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `tmdb_cache` (
  `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -91,7 +91,7 @@ CREATE TABLE `tmdb_cache` (
  `imdb_id` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
  `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `logins` (
  `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -102,7 +102,7 @@ CREATE TABLE `logins` (
  `status` enum('Success','IncorrectPassword','BadUsername','ServerError') COLLATE utf8_unicode_ci NOT NULL,
  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `background_color_cache` (
  `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -112,7 +112,7 @@ CREATE TABLE `background_color_cache` (
  `blue` int(3) NOT NULL,
  PRIMARY KEY (`id`),
  UNIQUE KEY `path` (`path`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `activities` (
  `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -128,13 +128,13 @@ CREATE TABLE `activities` (
  KEY `update_request_actions` (`request_id`),
  CONSTRAINT `update_request_actions` FOREIGN KEY (`request_id`) REFERENCES `user_requests` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
  CONSTRAINT `update_user_actions` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `activity_status` (
  `user_id` int(11) NOT NULL,
  `last_viewed` timestamp NOT NULL,
  UNIQUE KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `js_errors` (
  `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -142,7 +142,7 @@ CREATE TABLE `js_errors` (
  `stack` text COLLATE utf8_unicode_ci NOT NULL,
  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `password_reset` (
  `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -151,14 +151,14 @@ CREATE TABLE `password_reset` (
  `token` char(64) COLLATE utf8_unicode_ci NOT NULL,
  `used` tinyint(1) NOT NULL DEFAULT '0',
  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `library_stats_cache` (
  `id` int(11) NOT NULL AUTO_INCREMENT,
  `data` json NOT NULL,
  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `imdb_ratings` (
  `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -167,7 +167,7 @@ CREATE TABLE `imdb_ratings` (
  `votes` int(11) NOT NULL,
  PRIMARY KEY (`id`),
  UNIQUE KEY `imdbid` (`imdbid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `banned_ips` (
  `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -175,18 +175,18 @@ CREATE TABLE `banned_ips` (
  `why` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
  `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 # Triggers
 CREATE TRIGGER `IncrementCommentCount` AFTER INSERT ON `request_comments`
- FOR EACH ROW UPDATE user_requests r SET r.comment_count=r.comment_count+1 WHERE r.id=NEW.req_id
+ FOR EACH ROW UPDATE user_requests r SET r.comment_count=r.comment_count+1 WHERE r.id=NEW.req_id;
 
 CREATE TRIGGER `DecrementCommentCount` AFTER INSERT ON `request_comments`
- FOR EACH ROW UPDATE user_requests r SET r.comment_count=r.comment_count-1 WHERE r.id=NEW.req_id
+ FOR EACH ROW UPDATE user_requests r SET r.comment_count=r.comment_count-1 WHERE r.id=NEW.req_id;
 
  CREATE TRIGGER `DeleteActivities` BEFORE DELETE ON `request_comments`
- FOR EACH ROW DELETE FROM activities WHERE type=2 AND JSON_EXTRACT(data, "$.comment_id")=OLD.id
+ FOR EACH ROW DELETE FROM activities WHERE type=2 AND JSON_EXTRACT(data, "$.comment_id")=OLD.id;
 
  CREATE TRIGGER `create_user_info` AFTER INSERT ON `users`
  FOR EACH ROW INSERT INTO user_info (userid, firstname, lastname, email, email_alerts, phone, phone_alerts, carrier)
-    VALUES (NEW.id, '', '', '', 0, 0, 0, 'verizon')
+    VALUES (NEW.id, '', '', '', 0, 0, 0, 'verizon');
