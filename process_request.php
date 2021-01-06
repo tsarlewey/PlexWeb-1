@@ -344,7 +344,7 @@ function register($username, $password, $confirm)
     $result = $db->query($query);
     if (!$result)
     {
-        return json_error("$db->err");
+        return json_error("Unexpected server error. Please try again");
     }
 
     if ($result->num_rows > 0)
