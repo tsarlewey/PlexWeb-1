@@ -3,8 +3,6 @@
  * Generated via 'show create table XYZ'
  */
 
-CREATE DATABASE plex;
-
 USE plex;
 
 CREATE TABLE `users` (
