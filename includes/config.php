@@ -3,7 +3,7 @@
 // This is a dummy config file that mirrors the actual config.php that exists in
 // the same directory. Replace values with the actual usernames/passwords/etc, and
 // rename/copy to config.php
-define('DB_SERVER', '10.98.161.171:3306');
+define('DB_SERVER', 'mysql-deployment:3306');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', 'tiger');
 define('DB_NAME', 'plex');
