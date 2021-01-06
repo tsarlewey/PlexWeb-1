@@ -3,7 +3,6 @@
  * Generated via 'show create table XYZ'
  */
 
-USE plex;
 
 CREATE TABLE `users` (
  `id` int(11) NOT NULL AUTO_INCREMENT,
