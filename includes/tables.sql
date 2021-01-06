@@ -44,7 +44,7 @@ CREATE TABLE `request_comments` (
  `last_edit` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
  PRIMARY KEY (`id`),
  KEY `req_id` (`req_id`),
- CONSTRAINT `request_comments_ibfk_1` REFERENCES `user_requests` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+ CONSTRAINT `request_comments_ibfk_1` FOREIGN KEY (`req_id`) REFERENCES `user_requests` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `ip_cache` (
